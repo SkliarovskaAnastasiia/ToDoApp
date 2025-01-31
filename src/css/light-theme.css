@@ -1,17 +1,18 @@
+/* ======================= Hero Styles ========================== */
 .background {
-  background-color: #efeff6;
-  background-image: url('../img/mobile/bg-mobile-light.jpg');
+  background-color: var(--background-color);
+  background-image: var(--background-image-mob);
   background-repeat: no-repeat;
-  background-size: 100% 38%;
+  background-size: 100% 34%;
   background-position: top;
 }
 
 .title-wraper {
-  width: 340px;
+  max-width: 340px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto 28px;
   padding-top: 44px;
 
   color: #ffffff;
@@ -19,25 +20,296 @@
   letter-spacing: 0.6em;
 }
 
+.theme-btn {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .theme-icon {
   width: 24px;
   height: 24px;
 }
 
+.theme-btn svg:last-child {
+  display: none;
+}
+.dark-theme .theme-btn svg:first-child {
+  display: none;
+}
+.dark-theme .theme-btn svg:last-child {
+  display: block;
+}
+/* ======================= Input Styles ========================== */
+
+.content-wraper {
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.input-form {
+  background-color: var(--block-background-color);
+  position: relative;
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  padding-right: 12px;
+}
+
+.input-box {
+  position: absolute;
+  left: 18px;
+  top: 10px;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 100%;
+}
+
+.input-field {
+  background-color: transparent;
+  flex-grow: 1;
+  padding: 12px 18px 12px 42px;
+  margin: 0;
+  border: none;
+
+  font-family: inherit;
+  font-size: 13px;
+  color: inherit;
+
+  outline: none;
+}
+
+.input-field::placeholder {
+  font-size: 12px;
+  color: var(--light-text-color);
+}
+
+.add-btn {
+  background-color: transparent;
+  color: var(--light-text-color);
+  transition: color 400ms ease;
+}
+
+/* ======================= Task List Styles ========================== */
+.list-container {
+  width: 100%;
+  background-color: var(--block-background-color);
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 8px 24px var(--shadow-color);
+}
+
+.task-list {
+  width: 100%;
+  min-height: 360px;
+  overflow: auto;
+}
+
+.epmty-item {
+  text-align: center;
+  padding-top: 50%;
+  color: var(--light-text-color);
+}
+
+.epmty-item.is-hidden {
+  display: none;
+}
+
+/* ======================= List Item Styles ========================== */
+.list-item {
+  display: flex;
+  align-items: center;
+
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 100%;
+  margin-right: 9px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 500ms ease;
+}
+
+.list-item:hover .custom-checkbox,
+.list-item:focus .custom-checkbox {
+  background: linear-gradient(
+        var(--block-background-color),
+        var(--block-background-color)
+      )
+      padding-box,
+    linear-gradient(45deg, #57ddff, #c058f3) border-box;
+  border-color: transparent;
+}
+
+.custom-checkbox-icon {
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.task-text {
+  max-width: 250px;
+}
+
+.checkbox:checked + .checkbox-label .custom-checkbox {
+  background-image: linear-gradient(45deg, #57ddff, #c058f3);
+}
+
+.checkbox:checked + .checkbox-label .custom-checkbox-icon {
+  opacity: 1;
+}
+
+.checkbox:checked + .checkbox-label .task-text {
+  color: var(--light-text-color);
+  text-decoration: line-through;
+}
+
+.delate-btn {
+  line-height: 0;
+  background-color: transparent;
+}
+
+.btn-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+
+.list-item:hover .btn-icon,
+.list-item:focus .btn-icon {
+  opacity: 1;
+}
+
+.info-container {
+  border-top: 1px solid var(--border-color);
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: var(--light-text-color);
+}
+
+.clear-taskts-btn {
+  background-color: transparent;
+  padding: 0;
+  color: var(--light-text-color);
+
+  transition: color 400ms ease;
+}
+
+.clear-taskts-btn:disabled {
+  pointer-events: none;
+}
+
+@media screen and (max-width: 767px) {
+  .tasks-nav.desktop-nav {
+    display: none;
+  }
+
+  .tasks-nav {
+    background-color: var(--block-background-color);
+    padding: 12px 18px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    box-shadow: 0px 8px 24px var(--shadow-color);
+  }
+}
+
+.nav-btn {
+  background-color: transparent;
+  color: var(--light-text-color);
+  font-weight: 700;
+
+  transition: color 400ms ease;
+}
+
+.nav-btn:hover,
+.nav-btn:focus,
+.add-btn:hover,
+.add-btn:focus,
+.clear-taskts-btn:hover,
+.clear-taskts-btn:focus {
+  color: var(--main-text-color);
+}
+
+.nav-btn:active {
+  color: #6f9bf9;
+}
+
+.reorder-info {
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 26px;
+  padding-bottom: 28px;
+  color: #9394a5c9;
+  font-weight: 700;
+}
+
 @media only screen and (min-width: 768px) {
   .background {
-    background-image: url('../img/desktop/bg-desktop-light.jpg');
+    background-image: var(--background-image-desk);
   }
 
   .title-wraper {
-    width: 500px;
-    padding-top: 48px;
+    max-width: 500px;
+    padding-top: 42px;
+    margin-bottom: 20px;
 
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .theme-icon {
     width: 28px;
     height: 28px;
+  }
+
+  .input-field::placeholder {
+    font-size: 14px;
+  }
+
+  .content-wraper {
+    max-width: 500px;
+  }
+
+  .epmty-item {
+    padding-top: 35%;
+  }
+
+  .tasks-nav.mobile-nav {
+    display: none;
+  }
+
+  .tasks-nav {
+    display: flex;
+  }
+
+  .info-container,
+  .clear-taskts-btn,
+  .nav-btn {
+    font-size: 14px;
   }
 }

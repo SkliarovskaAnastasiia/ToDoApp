@@ -1,9 +1,0 @@
-.background.is-dark {
-  background-image: url('../img/mobile/bg-mobile-dark.jpg');
-}
-
-@media only screen and (min-width: 768px) {
-  .background.is-dark {
-    background-image: url('../img/desktop/bg-desktop-dark.jpg');
-  }
-}

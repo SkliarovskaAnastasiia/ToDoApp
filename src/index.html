@@ -22,9 +22,66 @@
       <div class="title-wraper">
         <h2 class="title">TODO</h2>
 
-        <svg class="theme-icon">
-          <use href="./img/icons/symbol-defs.svg#icon-icon-moon"></use>
-        </svg>
+        <button class="theme-btn js-theme-btn" type="button">
+          <svg class="theme-icon">
+            <use href="./img/icons/symbol-defs.svg#icon-icon-moon"></use>
+          </svg>
+          <svg class="theme-icon">
+            <use href="./img/icons/symbol-defs.svg#icon-icon-sun"></use>
+          </svg>
+        </button>
+      </div>
+      <div class="content-wraper">
+        <form class="input-form js-form">
+          <span class="input-box"></span>
+          <input
+            type="text"
+            class="input-field"
+            name="task"
+            placeholder="Create a new task..."
+          />
+          <button class="add-btn" type="submit">Add</button>
+        </form>
+        <div class="list-container">
+          <ul class="task-list js-list">
+            <p class="epmty-item js-empty-item">List is empty</p>
+          </ul>
+          <div class="info-container">
+            <p class="count-tasks-text">
+              <span class="js-quantity">0</span>&#xa0;tasks left
+            </p>
+            <ul class="tasks-nav desktop-nav">
+              <li class="tasks-nav-item">
+                <button class="nav-btn">All</button>
+              </li>
+              <li class="tasks-nav-item">
+                <button class="nav-btn">Active</button>
+              </li>
+              <li class="tasks-nav-item">
+                <button class="nav-btn">Completed</button>
+              </li>
+            </ul>
+            <button
+              class="clear-taskts-btn js-clear-taskts-btn"
+              type="button"
+              disabled
+            >
+              Clear Completed
+            </button>
+          </div>
+        </div>
+        <ul class="tasks-nav mobile-nav">
+          <li class="tasks-nav-item">
+            <button class="nav-btn" type="button">All</button>
+          </li>
+          <li class="tasks-nav-item">
+            <button class="nav-btn" type="button">Active</button>
+          </li>
+          <li class="tasks-nav-item">
+            <button class="nav-btn" type="button">Completed</button>
+          </li>
+        </ul>
+        <p class="reorder-info">Drag and drop to reorder list</p>
       </div>
     </div>
     <script type="module" src="./main.js"></script>

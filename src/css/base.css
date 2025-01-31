@@ -1,6 +1,58 @@
+:root {
+  --background-color: #efeff6;
+  --background-image-mob: url('../img/mobile/bg-mobile-light.jpg');
+  --background-image-desk: url('../img/desktop/bg-desktop-light.jpg');
+  --block-background-color: #ffffff;
+  --main-text-color: #484b6a;
+  --light-text-color: #9394a5;
+  --border-color: #d2d3db;
+  --shadow-color: #959da533;
+}
+
+.dark-theme {
+  --background-color: #25273c;
+  --background-image-mob: url('../img/mobile/bg-mobile-dark.jpg');
+  --background-image-desk: url('../img/desktop/bg-desktop-dark.jpg');
+  --block-background-color: #393a4c;
+  --main-text-color: #cacde8;
+  --light-text-color: #777a92;
+  --border-color: #4d5066;
+  --shadow-color: hsl(235, 21%, 11%);
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Josefin Sans', serif;
-  font-size: 18px;
+  font-size: 14px;
+  color: var(--main-text-color);
+  background-color: var(--background-color);
   height: 100vh;
   width: 100%;
+  line-height: 1.33;
+  letter-spacing: -0.02em;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
