@@ -16,16 +16,93 @@
       rel="stylesheet"
     />
     <script type="module" crossorigin src="/ToDoApp/index.js"></script>
-    <link rel="stylesheet" crossorigin href="/ToDoApp/assets/index-BaJ_ytnN.css">
+    <link rel="stylesheet" crossorigin href="/ToDoApp/assets/index-C0wr-deY.css">
   </head>
   <body>
     <div class="container background">
       <div class="title-wraper">
         <h2 class="title">TODO</h2>
 
-        <svg class="theme-icon">
-          <use href="/ToDoApp/assets/symbol-defs-BP4IDnnM.svg#icon-icon-moon"></use>
-        </svg>
+        <button class="theme-btn js-theme-btn" type="button">
+          <svg class="theme-icon">
+            <use href="/ToDoApp/assets/symbol-defs-BP4IDnnM.svg#icon-icon-moon"></use>
+          </svg>
+          <svg class="theme-icon">
+            <use href="/ToDoApp/assets/symbol-defs-BP4IDnnM.svg#icon-icon-sun"></use>
+          </svg>
+        </button>
+      </div>
+      <div class="content-wraper">
+        <form class="input-form js-form">
+          <span class="input-box"></span>
+          <input
+            type="text"
+            class="input-field"
+            name="task"
+            placeholder="Create a new task..."
+            autocomplete="off"
+          />
+          <button class="add-btn" type="submit">Add</button>
+        </form>
+        <div class="list-container">
+          <div class="iteams-wraper">
+            <p class="epmty-item js-empty-item">List is empty</p>
+            <ul class="task-list js-list"></ul>
+          </div>
+          <div class="info-container">
+            <p class="count-tasks-text js-quantity">0 tasks left</p>
+            <ul class="tasks-nav desktop-nav">
+              <li class="tasks-nav-item">
+                <button
+                  class="nav-btn js-filter-btn active"
+                  type="button"
+                  id="all"
+                >
+                  All
+                </button>
+              </li>
+              <li class="tasks-nav-item">
+                <button class="nav-btn js-filter-btn" type="button" id="active">
+                  Active
+                </button>
+              </li>
+              <li class="tasks-nav-item">
+                <button
+                  class="nav-btn js-filter-btn"
+                  type="button"
+                  id="completed"
+                >
+                  Completed
+                </button>
+              </li>
+            </ul>
+            <button
+              class="clear-taskts-btn js-clear-taskts-btn"
+              type="button"
+              disabled
+            >
+              Clear Completed
+            </button>
+          </div>
+        </div>
+        <ul class="tasks-nav mobile-nav">
+          <li class="tasks-nav-item">
+            <button class="nav-btn js-filter-btn active" type="button" id="all">
+              All
+            </button>
+          </li>
+          <li class="tasks-nav-item">
+            <button class="nav-btn js-filter-btn" type="button" id="active">
+              Active
+            </button>
+          </li>
+          <li class="tasks-nav-item">
+            <button class="nav-btn js-filter-btn" type="button" id="completed">
+              Completed
+            </button>
+          </li>
+        </ul>
+        <p class="reorder-info">Drag and drop to reorder list</p>
       </div>
     </div>
   </body>
