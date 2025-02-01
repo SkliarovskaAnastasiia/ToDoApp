@@ -39,26 +39,42 @@
             class="input-field"
             name="task"
             placeholder="Create a new task..."
+            autocomplete="off"
           />
           <button class="add-btn" type="submit">Add</button>
         </form>
         <div class="list-container">
-          <ul class="task-list js-list">
+          <div class="iteams-wraper">
             <p class="epmty-item js-empty-item">List is empty</p>
-          </ul>
+            <ul class="task-list js-list"></ul>
+          </div>
           <div class="info-container">
             <p class="count-tasks-text">
               <span class="js-quantity">0</span>&#xa0;tasks left
             </p>
             <ul class="tasks-nav desktop-nav">
               <li class="tasks-nav-item">
-                <button class="nav-btn">All</button>
+                <button
+                  class="nav-btn js-filter-btn active"
+                  type="button"
+                  id="all"
+                >
+                  All
+                </button>
               </li>
               <li class="tasks-nav-item">
-                <button class="nav-btn">Active</button>
+                <button class="nav-btn js-filter-btn" type="button" id="active">
+                  Active
+                </button>
               </li>
               <li class="tasks-nav-item">
-                <button class="nav-btn">Completed</button>
+                <button
+                  class="nav-btn js-filter-btn"
+                  type="button"
+                  id="completed"
+                >
+                  Completed
+                </button>
               </li>
             </ul>
             <button
@@ -72,13 +88,19 @@
         </div>
         <ul class="tasks-nav mobile-nav">
           <li class="tasks-nav-item">
-            <button class="nav-btn" type="button">All</button>
+            <button class="nav-btn js-filter-btn active" type="button" id="all">
+              All
+            </button>
           </li>
           <li class="tasks-nav-item">
-            <button class="nav-btn" type="button">Active</button>
+            <button class="nav-btn js-filter-btn" type="button" id="active">
+              Active
+            </button>
           </li>
           <li class="tasks-nav-item">
-            <button class="nav-btn" type="button">Completed</button>
+            <button class="nav-btn js-filter-btn" type="button" id="completed">
+              Completed
+            </button>
           </li>
         </ul>
         <p class="reorder-info">Drag and drop to reorder list</p>

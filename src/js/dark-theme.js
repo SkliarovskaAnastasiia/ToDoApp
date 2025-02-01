@@ -1,17 +1,23 @@
+import {
+  addDataToLocalstorage,
+  removeDataFromLocalStorage,
+  getDataFromLocalStorage,
+} from './localstorage';
+
 const enableDarkmode = () => {
   document.body.classList.add('dark-theme');
-  localStorage.setItem('darkmode', 'active');
+  addDataToLocalstorage('darkmode', 'active');
 };
 
 const disableDarkmode = () => {
   document.body.classList.remove('dark-theme');
-  localStorage.removeItem('darkmode');
+  removeDataFromLocalStorage('darkmode');
 };
 
-let darkTheme = localStorage.getItem('darkmode');
+let darkTheme = getDataFromLocalStorage('darkmode');
 if (darkTheme === 'active') enableDarkmode();
 
 document.querySelector('.js-theme-btn').addEventListener('click', () => {
-  darkTheme = localStorage.getItem('darkmode');
+  darkTheme = getDataFromLocalStorage('darkmode');
   darkTheme !== 'active' ? enableDarkmode() : disableDarkmode();
 });

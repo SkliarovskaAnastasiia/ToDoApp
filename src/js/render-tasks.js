@@ -1,45 +1,78 @@
 import { refs } from './refs';
+import { addDataToLocalstorage } from './localstorage';
+import { delateTask } from '../main';
 
-function generateId() {
-  return `${Math.floor(Math.random() * 16777215).toString(16)}`;
+function createTaskItem(task, taskIndex) {
+  const taskLi = document.createElement('li');
+  taskLi.className = 'list-item';
+  taskLi.id = `task-${taskIndex}`;
+  taskLi.innerHTML = `
+  <input class="checkbox js-checkbox visually-hidden" type="checkbox" id="${taskIndex}"/>
+  <label class="checkbox-label" for="${taskIndex}">
+     <span class="custom-checkbox">
+        <svg class="custom-checkbox-icon" width="10px" height="10px">
+          <use href=".//img/icons/symbol-defs.svg#icon-icon-check"></use>
+        </svg>
+     </span>
+     <p class="task-text">${task.text}</p>
+  </label>
+  <button class="delate-btn" id="btn-${taskIndex}">
+     <svg class="btn-icon">
+         <use href="./img/icons/symbol-defs.svg#icon-icon-cross"></use>
+     </svg>
+  </button>
+  `;
+
+  return taskLi;
 }
 
-export const renderTask = taskText => {
-  const taskId = generateId();
-  const taskCard = `<li class="list-item" id="task-${taskId}">
-                <input
-                  class="checkbox visually-hidden"
-                  type="checkbox"
-                  id="${taskId}"
-                />
-                <label class="checkbox-label" for="${taskId}">
-                  <span class="custom-checkbox">
-                    <svg
-                      class="custom-checkbox-icon"
-                      width="10px"
-                      height="10px"
-                    >
-                      <use
-                        href=".//img/icons/symbol-defs.svg#icon-icon-check"
-                      ></use>
-                    </svg>
-                  </span>
-                  <p class="task-text">${taskText}</p>
-                </label>
-              <button class="delate-btn js-delate-btn" id="btn-${taskId}">
-                <svg class="btn-icon">
-                  <use href="./img/icons/symbol-defs.svg#icon-icon-cross"></use>
-                </svg>
-              </button>
-            </li>`;
+function renderTask(tasks) {
+  refs.tasksListEl.innerHTML = '';
 
-  refs.tasksListEl.insertAdjacentHTML('beforeend', taskCard);
+  if (!tasks.length) {
+    refs.textContentOfEmptyList.classList.remove('is-hidden');
+    refs.clearTasksBtn.disabled = true;
+  } else {
+    refs.textContentOfEmptyList.classList.add('is-hidden');
+    refs.clearTasksBtn.disabled = false;
+  }
 
-  document.querySelector(`#btn-${taskId}`).addEventListener('click', () => {
-    refs.tasksListEl.children[`task-${taskId}`].remove();
-    if (refs.tasksListEl.childElementCount === 1) {
-      refs.textContentOfEmptyList.classList.remove('is-hidden');
-    }
+  tasks.forEach((task, idx, tasks) => {
+    const taskItem = createTaskItem(task, idx);
+
+    refs.tasksListEl.append(taskItem);
+
+    const checkbox = taskItem.querySelector('.js-checkbox');
+
+    checkbox.addEventListener('change', event => {
+      tasks[idx].completed = event.currentTarget.checked;
+      addDataToLocalstorage('tasks', tasks);
+    });
+
+    checkbox.checked = task.completed;
+
+    taskItem.querySelector(`#btn-${idx}`).addEventListener('click', () => {
+      delateTask(tasks, idx);
+    });
   });
-  console.dir(refs.tasksListEl);
-};
+}
+
+export function renderFilteredTasks(tasks, filter) {
+  let filteredTasks = [];
+
+  switch (filter) {
+    case 'active': {
+      filteredTasks = tasks.filter(task => !task.completed);
+      break;
+    }
+    case 'completed': {
+      filteredTasks = tasks.filter(task => task.completed);
+      break;
+    }
+    default: {
+      filteredTasks = tasks;
+    }
+  }
+
+  renderTask(filteredTasks);
+}

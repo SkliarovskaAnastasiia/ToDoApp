@@ -79,7 +79,7 @@
   border: none;
 
   font-family: inherit;
-  font-size: 13px;
+  font-size: inherit;
   color: inherit;
 
   outline: none;
@@ -87,6 +87,7 @@
 
 .input-field::placeholder {
   font-size: 12px;
+
   color: var(--light-text-color);
 }
 
@@ -105,6 +106,10 @@
   box-shadow: 0px 8px 24px var(--shadow-color);
 }
 
+.iteams-wraper {
+  position: relative;
+}
+
 .task-list {
   width: 100%;
   min-height: 360px;
@@ -112,8 +117,10 @@
 }
 
 .epmty-item {
+  position: absolute;
+  top: 50%;
+  left: 40%;
   text-align: center;
-  padding-top: 50%;
   color: var(--light-text-color);
 }
 
@@ -221,6 +228,7 @@
 
 .clear-taskts-btn:disabled {
   pointer-events: none;
+  color: var(--disabled-color);
 }
 
 @media screen and (max-width: 767px) {
@@ -256,7 +264,7 @@
   color: var(--main-text-color);
 }
 
-.nav-btn:active {
+.nav-btn.active {
   color: #6f9bf9;
 }
 
@@ -293,10 +301,6 @@
 
   .content-wraper {
     max-width: 500px;
-  }
-
-  .epmty-item {
-    padding-top: 35%;
   }
 
   .tasks-nav.mobile-nav {

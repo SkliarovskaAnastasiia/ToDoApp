@@ -5,6 +5,7 @@
   --block-background-color: #ffffff;
   --main-text-color: #484b6a;
   --light-text-color: #9394a5;
+  --disabled-color: #9394a574;
   --border-color: #d2d3db;
   --shadow-color: #959da533;
 }
@@ -16,6 +17,7 @@
   --block-background-color: #393a4c;
   --main-text-color: #cacde8;
   --light-text-color: #777a92;
+  --disabled-color: #777a9251;
   --border-color: #4d5066;
   --shadow-color: hsl(235, 21%, 11%);
 }
