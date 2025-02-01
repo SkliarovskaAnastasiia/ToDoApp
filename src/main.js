@@ -4,24 +4,36 @@ import { renderFilteredTasks } from './js/render-tasks.js';
 import {
   addDataToLocalstorage,
   getDataFromLocalStorage,
-  removeDataFromLocalStorage,
 } from './js/localstorage.js';
+import { countActiveTasks } from './js/count-tasks.js';
 
-let tasksArr = getDataFromLocalStorage('tasks') || [];
-let currentFilter = 'all';
+export let tasksArr = getDataFromLocalStorage('tasks') || [];
+export let currentFilter = 'all';
 
 if (tasksArr.length) {
   refs.textContentOfEmptyList.classList.add('is-hidden');
-  renderFilteredTasks(tasksArr, currentFilter);
-
-  refs.clearTasksBtn.disabled = false;
+  renderFilteredTasks(currentFilter);
 
   refs.clearTasksBtn.addEventListener('click', () => {
-    tasksArr = [];
-    refs.tasksListEl.innerHTML = '';
-    refs.textContentOfEmptyList.classList.remove('is-hidden');
-    removeDataFromLocalStorage('tasks');
-    refs.clearTasksBtn.disabled = true;
+    if (currentFilter === 'all') {
+      tasksArr = [];
+      addDataToLocalstorage('tasks', tasksArr);
+    } else if (currentFilter === 'active') {
+      tasksArr = tasksArr.filter(task => task.completed);
+      addDataToLocalstorage('tasks', tasksArr);
+    } else if (currentFilter === 'completed') {
+      tasksArr = tasksArr.filter(task => !task.completed);
+      addDataToLocalstorage('tasks', tasksArr);
+    }
+
+    renderFilteredTasks(currentFilter);
+    countActiveTasks(tasksArr);
+
+    if (!tasksArr.length) {
+      refs.textContentOfEmptyList.classList.toggle('is-hidden');
+
+      refs.clearTasksBtn.disabled = true;
+    }
   });
 }
 
@@ -33,39 +45,51 @@ function onFormSubmit(event) {
   if (inputValue === '') return;
 
   const taskObj = {
+    id: Date.now(),
     text: inputValue,
     completed: false,
   };
 
   tasksArr.push(taskObj);
 
-  renderFilteredTasks(tasksArr, currentFilter);
+  renderFilteredTasks(currentFilter);
   refs.textContentOfEmptyList.classList.add('is-hidden');
 
   addDataToLocalstorage('tasks', tasksArr);
 
-  if (tasksArr.length) {
-    refs.clearTasksBtn.disabled = false;
-
-    refs.clearTasksBtn.addEventListener('click', () => {
+  refs.clearTasksBtn.addEventListener('click', () => {
+    if (currentFilter === 'all') {
       tasksArr = [];
-      refs.tasksListEl.innerHTML = '';
-      refs.textContentOfEmptyList.classList.remove('is-hidden');
-      removeDataFromLocalStorage('tasks');
+      addDataToLocalstorage('tasks', tasksArr);
+    } else if (currentFilter === 'active') {
+      tasksArr = tasksArr.filter(task => task.completed);
+      addDataToLocalstorage('tasks', tasksArr);
+    } else if (currentFilter === 'completed') {
+      tasksArr = tasksArr.filter(task => !task.completed);
+      addDataToLocalstorage('tasks', tasksArr);
+    }
+
+    renderFilteredTasks(currentFilter);
+    countActiveTasks(tasksArr);
+
+    if (!tasksArr.length) {
+      refs.textContentOfEmptyList.classList.toggle('is-hidden');
+
       refs.clearTasksBtn.disabled = true;
-    });
-  }
+    }
+  });
 
   event.currentTarget.reset();
 }
 
 refs.formEl.addEventListener('submit', onFormSubmit);
 
-export function delateTask(tasks, idx) {
-  tasksArr = tasks.filter((_, i) => i !== idx);
+export function delateTask(tasks, taskId) {
+  tasksArr = tasks.filter(task => task.id !== taskId);
 
   addDataToLocalstorage('tasks', tasksArr);
-  renderFilteredTasks(tasksArr, currentFilter);
+  renderFilteredTasks(currentFilter);
+  countActiveTasks(tasksArr);
 
   if (!refs.tasksListEl.children.length) {
     refs.textContentOfEmptyList.classList.remove('is-hidden');
@@ -78,6 +102,6 @@ refs.filters.forEach(btn => {
     event.target.classList.add('active');
 
     currentFilter = event.target.id;
-    renderFilteredTasks(tasksArr, currentFilter);
+    renderFilteredTasks(currentFilter);
   });
 });

@@ -1,9 +1,8 @@
 import { refs } from './refs';
 
 export function countActiveTasks(tasksArr) {
-  const combletedTasks = tasksArr.filter(
-    ({ completed }) => completed === false
-  );
+  const incompletedTasks = tasksArr.filter(task => !task.completed).length;
+  const taskStr = incompletedTasks === 1 ? 'task' : 'tasks';
 
-  refs.tasksQuantity.textContent = combletedTasks.length;
+  refs.tasksQuantity.textContent = `${incompletedTasks} ${taskStr} left`;
 }

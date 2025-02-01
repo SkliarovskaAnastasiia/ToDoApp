@@ -1,6 +1,7 @@
 import { refs } from './refs';
 import { addDataToLocalstorage } from './localstorage';
-import { delateTask } from '../main';
+import { delateTask, tasksArr, currentFilter } from '../main';
+import { countActiveTasks } from './count-tasks';
 
 function createTaskItem(task, taskIndex) {
   const taskLi = document.createElement('li');
@@ -47,30 +48,34 @@ function renderTask(tasks) {
     checkbox.addEventListener('change', event => {
       tasks[idx].completed = event.currentTarget.checked;
       addDataToLocalstorage('tasks', tasks);
+      renderFilteredTasks(currentFilter);
+      countActiveTasks(tasks);
     });
 
     checkbox.checked = task.completed;
 
     taskItem.querySelector(`#btn-${idx}`).addEventListener('click', () => {
-      delateTask(tasks, idx);
+      delateTask(tasks, task.id);
     });
   });
+
+  countActiveTasks(tasks);
 }
 
-export function renderFilteredTasks(tasks, filter) {
+export function renderFilteredTasks(filter) {
   let filteredTasks = [];
 
   switch (filter) {
     case 'active': {
-      filteredTasks = tasks.filter(task => !task.completed);
+      filteredTasks = tasksArr.filter(task => !task.completed);
       break;
     }
     case 'completed': {
-      filteredTasks = tasks.filter(task => task.completed);
+      filteredTasks = tasksArr.filter(task => task.completed);
       break;
     }
     default: {
-      filteredTasks = tasks;
+      filteredTasks = tasksArr;
     }
   }
 
