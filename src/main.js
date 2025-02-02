@@ -14,27 +14,7 @@ if (tasksArr.length) {
   refs.textContentOfEmptyList.classList.add('is-hidden');
   renderFilteredTasks(currentFilter);
 
-  refs.clearTasksBtn.addEventListener('click', () => {
-    if (currentFilter === 'all') {
-      tasksArr = [];
-      addDataToLocalstorage('tasks', tasksArr);
-    } else if (currentFilter === 'active') {
-      tasksArr = tasksArr.filter(task => task.completed);
-      addDataToLocalstorage('tasks', tasksArr);
-    } else if (currentFilter === 'completed') {
-      tasksArr = tasksArr.filter(task => !task.completed);
-      addDataToLocalstorage('tasks', tasksArr);
-    }
-
-    renderFilteredTasks(currentFilter);
-    countActiveTasks(tasksArr);
-
-    if (!tasksArr.length) {
-      refs.textContentOfEmptyList.classList.toggle('is-hidden');
-
-      refs.clearTasksBtn.disabled = true;
-    }
-  });
+  refs.clearTasksBtn.addEventListener('click', onClearBtn);
 }
 
 function onFormSubmit(event) {
@@ -57,35 +37,35 @@ function onFormSubmit(event) {
 
   addDataToLocalstorage('tasks', tasksArr);
 
-  refs.clearTasksBtn.addEventListener('click', () => {
-    if (currentFilter === 'all') {
-      tasksArr = [];
-      addDataToLocalstorage('tasks', tasksArr);
-    } else if (currentFilter === 'active') {
-      tasksArr = tasksArr.filter(task => task.completed);
-      addDataToLocalstorage('tasks', tasksArr);
-    } else if (currentFilter === 'completed') {
-      tasksArr = tasksArr.filter(task => !task.completed);
-      addDataToLocalstorage('tasks', tasksArr);
-    }
-
-    renderFilteredTasks(currentFilter);
-    countActiveTasks(tasksArr);
-
-    if (!tasksArr.length) {
-      refs.textContentOfEmptyList.classList.toggle('is-hidden');
-
-      refs.clearTasksBtn.disabled = true;
-    }
-  });
+  refs.clearTasksBtn.addEventListener('click', onClearBtn);
 
   event.currentTarget.reset();
 }
 
 refs.formEl.addEventListener('submit', onFormSubmit);
 
-export function delateTask(tasks, taskId) {
-  tasksArr = tasks.filter(task => task.id !== taskId);
+function onClearBtn() {
+  if (currentFilter === 'all') {
+    tasksArr = [];
+  } else if (currentFilter === 'active') {
+    tasksArr = tasksArr.filter(task => task.completed);
+  } else if (currentFilter === 'completed') {
+    tasksArr = tasksArr.filter(task => !task.completed);
+  }
+
+  addDataToLocalstorage('tasks', tasksArr);
+  renderFilteredTasks(currentFilter);
+  countActiveTasks(tasksArr);
+
+  if (!tasksArr.length) {
+    refs.textContentOfEmptyList.classList.toggle('is-hidden');
+
+    refs.clearTasksBtn.disabled = true;
+  }
+}
+
+export function delateTask(taskId) {
+  tasksArr = tasksArr.filter(task => task.id !== taskId);
 
   addDataToLocalstorage('tasks', tasksArr);
   renderFilteredTasks(currentFilter);

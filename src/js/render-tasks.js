@@ -6,7 +6,7 @@ import { countActiveTasks } from './count-tasks';
 function createTaskItem(task, taskIndex) {
   const taskLi = document.createElement('li');
   taskLi.className = 'list-item';
-  taskLi.id = `task-${taskIndex}`;
+  taskLi.id = `task-${task.id}`;
   taskLi.innerHTML = `
   <input class="checkbox js-checkbox visually-hidden" type="checkbox" id="${taskIndex}"/>
   <label class="checkbox-label" for="${taskIndex}">
@@ -17,7 +17,7 @@ function createTaskItem(task, taskIndex) {
      </span>
      <p class="task-text">${task.text}</p>
   </label>
-  <button class="delate-btn" id="btn-${taskIndex}">
+  <button class="delate-btn" id="btn-${task.id}">
      <svg class="btn-icon">
          <use href="./img/icons/symbol-defs.svg#icon-icon-cross"></use>
      </svg>
@@ -54,8 +54,8 @@ function renderTask(tasks) {
 
     checkbox.checked = task.completed;
 
-    taskItem.querySelector(`#btn-${idx}`).addEventListener('click', () => {
-      delateTask(tasks, task.id);
+    taskItem.querySelector(`#btn-${task.id}`).addEventListener('click', () => {
+      delateTask(task.id);
     });
   });
 
@@ -75,7 +75,7 @@ export function renderFilteredTasks(filter) {
       break;
     }
     default: {
-      filteredTasks = tasksArr;
+      filteredTasks = [...tasksArr];
     }
   }
 
