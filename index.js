@@ -3,14 +3,14 @@
   <label class="checkbox-label" for="${t}">
      <span class="custom-checkbox">
         <svg class="custom-checkbox-icon" width="10px" height="10px">
-          <use href="./img/icons/symbol-defs.svg#icon-icon-check"></use>
+          <use href="/img/icons/symbol-defs.svg#icon-icon-check"></use>
         </svg>
      </span>
      <p class="task-text">${e.text}</p>
   </label>
   <button class="delate-btn" id="btn-${e.id}">
      <svg class="btn-icon">
-         <use href="./img/icons/symbol-defs.svg#icon-icon-cross"></use>
+         <use href="/img/icons/symbol-defs.svg#icon-icon-cross"></use>
      </svg>
   </button>
   `,s}function E(e){r.tasksListEl.innerHTML="",e.length?(r.textContentOfEmptyList.classList.add("is-hidden"),r.clearTasksBtn.disabled=!1):(r.textContentOfEmptyList.classList.remove("is-hidden"),r.clearTasksBtn.disabled=!0),e.forEach((t,s,c)=>{const i=v(t,s);r.tasksListEl.append(i);const a=i.querySelector(".js-checkbox");a.addEventListener("change",d=>{c[s].completed=d.currentTarget.checked,u("tasks",c),l(o),m(c)}),a.checked=t.completed,i.querySelector(`#btn-${t.id}`).addEventListener("click",()=>{x(t.id)})}),m(e)}function l(e){let t=[];switch(e){case"active":{t=n.filter(s=>!s.completed);break}case"completed":{t=n.filter(s=>s.completed);break}default:t=[...n]}E(t),y(),r.tasksListEl.addEventListener("dragover",b),r.tasksListEl.addEventListener("dragenter",s=>s.preventDefault())}let n=g("tasks")||[],o="all";n.length&&(r.textContentOfEmptyList.classList.add("is-hidden"),l(o),r.clearTasksBtn.addEventListener("click",k));function S(e){e.preventDefault();const t=r.formEl.elements.task.value.trim();if(t==="")return;const s={id:Date.now(),text:t,completed:!1};n.push(s),l(o),r.textContentOfEmptyList.classList.add("is-hidden"),u("tasks",n),r.clearTasksBtn.addEventListener("click",k),e.currentTarget.reset()}r.formEl.addEventListener("submit",S);function k(){o==="all"?n=[]:o==="active"?n=n.filter(e=>e.completed):o==="completed"&&(n=n.filter(e=>!e.completed)),u("tasks",n),l(o),m(n),n.length||(r.textContentOfEmptyList.classList.toggle("is-hidden"),r.clearTasksBtn.disabled=!0)}function x(e){n=n.filter(t=>t.id!==e),u("tasks",n),l(o),m(n),r.tasksListEl.children.length||r.textContentOfEmptyList.classList.remove("is-hidden")}r.filters.forEach(e=>{e.addEventListener("click",t=>{document.querySelector(".js-filter-btn.active").classList.remove("active"),t.target.classList.add("active"),o=t.target.id,l(o)})});
