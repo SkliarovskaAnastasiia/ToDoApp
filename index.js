@@ -3,7 +3,7 @@
   <label class="checkbox-label" for="${t}">
      <span class="custom-checkbox">
         <svg class="custom-checkbox-icon" width="10px" height="10px">
-          <use href=".//img/icons/symbol-defs.svg#icon-icon-check"></use>
+          <use href="./img/icons/symbol-defs.svg#icon-icon-check"></use>
         </svg>
      </span>
      <p class="task-text">${e.text}</p>
