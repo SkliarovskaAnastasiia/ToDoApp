@@ -6,6 +6,7 @@ import {
   getDataFromLocalStorage,
 } from './js/localstorage.js';
 import { countActiveTasks } from './js/count-tasks.js';
+import './js/reorder-list.js';
 
 export let tasksArr = getDataFromLocalStorage('tasks') || [];
 export let currentFilter = 'all';

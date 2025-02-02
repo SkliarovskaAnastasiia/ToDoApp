@@ -2,11 +2,13 @@ import { refs } from './refs';
 import { addDataToLocalstorage } from './localstorage';
 import { delateTask, tasksArr, currentFilter } from '../main';
 import { countActiveTasks } from './count-tasks';
+import { addDraggingClass, dragoverListEl } from './reorder-list';
 
 function createTaskItem(task, taskIndex) {
   const taskLi = document.createElement('li');
-  taskLi.className = 'list-item';
+  taskLi.className = 'list-item js-list-item';
   taskLi.id = `task-${task.id}`;
+  taskLi.draggable = 'true';
   taskLi.innerHTML = `
   <input class="checkbox js-checkbox visually-hidden" type="checkbox" id="${taskIndex}"/>
   <label class="checkbox-label" for="${taskIndex}">
@@ -80,4 +82,9 @@ export function renderFilteredTasks(filter) {
   }
 
   renderTask(filteredTasks);
+  addDraggingClass();
+  refs.tasksListEl.addEventListener('dragover', dragoverListEl);
+  refs.tasksListEl.addEventListener('dragenter', event =>
+    event.preventDefault()
+  );
 }

@@ -137,6 +137,10 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+.list-item.dragging :where(.checkbox, .checkbox-label, .delate-btn) {
+  opacity: 0;
+}
+
 .checkbox-label {
   display: flex;
   align-items: center;
