@@ -2,7 +2,11 @@ import { refs } from './refs';
 import { addDataToLocalstorage } from './localstorage';
 import { delateTask, tasksArr, currentFilter } from '../main';
 import { countActiveTasks } from './count-tasks';
-import { addDraggingClass, dragoverListEl } from './reorder-list';
+import {
+  addDraggingClass,
+  dragoverListEl,
+  touchmoveListEl,
+} from './reorder-list';
 
 function createTaskItem(task, taskIndex) {
   const taskLi = document.createElement('li');
@@ -87,4 +91,5 @@ export function renderFilteredTasks(filter) {
   refs.tasksListEl.addEventListener('dragenter', event =>
     event.preventDefault()
   );
+  refs.tasksListEl.addEventListener('touchmove', touchmoveListEl);
 }

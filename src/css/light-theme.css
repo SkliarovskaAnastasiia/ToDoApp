@@ -138,7 +138,7 @@
 }
 
 .list-item.dragging :where(.checkbox, .checkbox-label, .delate-btn) {
-  opacity: 0;
+  opacity: 0.5;
 }
 
 .checkbox-label {
