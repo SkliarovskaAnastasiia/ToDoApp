@@ -5,7 +5,6 @@ import {
   addDataToLocalstorage,
   getDataFromLocalStorage,
 } from './js/localstorage.js';
-import { countActiveTasks } from './js/count-tasks.js';
 
 export let tasksArr = getDataFromLocalStorage('tasks') || [];
 export let currentFilter = 'all';
@@ -55,7 +54,6 @@ function onClearBtn() {
 
   addDataToLocalstorage('tasks', tasksArr);
   renderFilteredTasks(currentFilter);
-  countActiveTasks(tasksArr);
 
   if (!tasksArr.length) {
     refs.textContentOfEmptyList.classList.toggle('is-hidden');
@@ -69,7 +67,6 @@ export function delateTask(taskId) {
 
   addDataToLocalstorage('tasks', tasksArr);
   renderFilteredTasks(currentFilter);
-  countActiveTasks(tasksArr);
 
   if (!refs.tasksListEl.children.length) {
     refs.textContentOfEmptyList.classList.remove('is-hidden');

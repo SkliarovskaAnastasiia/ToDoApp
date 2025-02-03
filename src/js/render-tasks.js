@@ -55,7 +55,6 @@ function renderTask(tasks) {
       tasks[idx].completed = event.currentTarget.checked;
       addDataToLocalstorage('tasks', tasks);
       renderFilteredTasks(currentFilter);
-      countActiveTasks(tasks);
     });
 
     checkbox.checked = task.completed;
@@ -64,8 +63,6 @@ function renderTask(tasks) {
       delateTask(task.id);
     });
   });
-
-  countActiveTasks(tasks);
 }
 
 export function renderFilteredTasks(filter) {
@@ -86,6 +83,7 @@ export function renderFilteredTasks(filter) {
   }
 
   renderTask(filteredTasks);
+  countActiveTasks(filteredTasks);
   addDraggingClass();
   refs.tasksListEl.addEventListener('dragover', dragoverListEl);
   refs.tasksListEl.addEventListener('dragenter', event =>

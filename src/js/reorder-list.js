@@ -3,11 +3,13 @@ import { refs } from './refs';
 function addClass(event) {
   const liEl = event.target.closest('.js-list-item');
   if (liEl) setTimeout(() => liEl.classList.add('dragging'), 0);
+  body.classList.add('no-scroll');
 }
 
 function removeClass(event) {
   const liEl = event.target.closest('.js-list-item');
   if (liEl) liEl.classList.remove('dragging');
+  body.classList.remove('no-scroll');
 }
 
 export function addDraggingClass() {
