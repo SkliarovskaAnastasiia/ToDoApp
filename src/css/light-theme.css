@@ -203,13 +203,6 @@
 .btn-icon {
   width: 14px;
   height: 14px;
-  opacity: 0;
-  transition: opacity 400ms ease;
-}
-
-.list-item:hover .btn-icon,
-.list-item:focus .btn-icon {
-  opacity: 1;
 }
 
 .info-container {
@@ -305,6 +298,16 @@
 
   .content-wraper {
     max-width: 500px;
+  }
+
+  .btn-icon {
+    opacity: 0;
+    transition: opacity 400ms ease;
+  }
+
+  .list-item:hover .btn-icon,
+  .list-item:focus .btn-icon {
+    opacity: 1;
   }
 
   .tasks-nav.mobile-nav {
