@@ -21,8 +21,6 @@ export function addDraggingClass() {
 }
 
 function reorderListEl(event, isTouch) {
-  event.preventDefault();
-
   const draggingItem = refs.tasksListEl.querySelector('.dragging');
 
   const siblings = [
@@ -40,6 +38,7 @@ function reorderListEl(event, isTouch) {
 }
 
 export function dragoverListEl(event) {
+  event.preventDefault();
   reorderListEl(event, false);
 }
 
