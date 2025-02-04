@@ -3,8 +3,11 @@ import { updateTaskList } from '../main';
 
 function addClass(event) {
   const liEl = event.target.closest('.js-list-item');
-  if (liEl) setTimeout(() => liEl.classList.add('dragging'), 0);
-  document.body.classList.add('no-scroll');
+  if (liEl)
+    setTimeout(() => {
+      liEl.classList.add('dragging');
+      document.body.classList.add('no-scroll');
+    }, 1000);
 }
 
 function removeClass(event) {
