@@ -59,7 +59,7 @@ body {
   overflow: hidden;
 }
 
-.no-sctoll {
-  touch-action: none;
+.no-scroll {
   overflow: hidden;
+  touch-action: none;
 }

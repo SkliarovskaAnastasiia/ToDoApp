@@ -82,3 +82,19 @@ refs.filters.forEach(btn => {
     renderFilteredTasks(currentFilter);
   });
 });
+
+export function updateTaskList() {
+  tasksArr = [...refs.tasksListEl.querySelectorAll('.js-list-item')].map(
+    item => {
+      return {
+        id: item.id,
+        text: item.querySelector('.task-text').textContent,
+        completed: item.querySelector('.js-checkbox').checked,
+      };
+    }
+  );
+
+  console.log(tasksArr);
+
+  addDataToLocalstorage('tasks', tasksArr);
+}

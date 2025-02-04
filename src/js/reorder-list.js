@@ -1,15 +1,16 @@
 import { refs } from './refs';
+import { updateTaskList } from '../main';
 
 function addClass(event) {
   const liEl = event.target.closest('.js-list-item');
   if (liEl) setTimeout(() => liEl.classList.add('dragging'), 0);
-  body.classList.add('no-scroll');
+  document.body.classList.add('no-scroll');
 }
 
 function removeClass(event) {
   const liEl = event.target.closest('.js-list-item');
   if (liEl) liEl.classList.remove('dragging');
-  body.classList.remove('no-scroll');
+  document.body.classList.remove('no-scroll');
 }
 
 export function addDraggingClass() {
@@ -37,6 +38,7 @@ function reorderListEl(event, isTouch) {
   );
 
   refs.tasksListEl.insertBefore(draggingItem, nextSibling);
+  updateTaskList();
 }
 
 export function dragoverListEl(event) {
